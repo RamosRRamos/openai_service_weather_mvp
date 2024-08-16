@@ -7,7 +7,7 @@ import mimetypes
 mimetypes.add_type("text/javascript", ".js", True)
 
 
-DEBUG = True
+DEBUG = config("DEBUG", default=False, cast=bool)
 
 SECRET_KEY = config("SECRET_KEY")
 
@@ -34,7 +34,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = "DENY"
 
-CELERY_BROKER_URL = config("RABBITMQ_URL", default="") or config("REDIS_URL")
+CELERY_BROKER_URL = config("REDIS_URL")
 CELERY_RESULT_BACKEND = config("REDIS_URL")
 CELERY_SEND_TASK_ERROR_EMAILS = True
 
@@ -49,4 +49,7 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+
+
 
